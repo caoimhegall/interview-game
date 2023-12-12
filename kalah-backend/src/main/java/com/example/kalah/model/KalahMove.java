@@ -1,6 +1,8 @@
 package com.example.kalah.model;
 
 public class KalahMove {
+
+    //move includes a player object and selected pitIndex
     private Player player;
     private int pitIndex;
 

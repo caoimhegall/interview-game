@@ -12,10 +12,12 @@ public class KalahGameService {
         kalahBoard = new KalahBoard(4, "Player1", "Player2");
     }
 
+    // Not used in my game yet but starts the game
     public void startGame() {
         kalahBoard = new KalahBoard(4, "Player1", "Player2");
     }
 
+    // Make move
     public KalahBoardResponse makeMove(KalahMove move) throws IllegalAccessException {
         kalahBoard.makeMove(move);
 

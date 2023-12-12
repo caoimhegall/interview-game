@@ -1,8 +1,8 @@
 package com.example.kalah.model;
 
 public class KalahBoard {
-    private Pit[] pits; // Array representing pits on the board
-    private Store[] stores; // Array representing stores for each player
+    private Pit[] pits;
+    private Store[] stores;
     private Player player1;
     private Player player2;
     private Player currentPlayer;
@@ -11,9 +11,11 @@ public class KalahBoard {
         player1 = new Player(player1Name, 1);
         player2 = new Player(player2Name, 2);
         currentPlayer = player1;
-        // Initialize the board with stones in each pit
-        pits = new Pit[14]; // 0-5: Player 1's pits, 7-12: Player 2's pits
-        stores = new Store[]{new Store(player1), new Store(player2)}; // 6: Player 1's store, 13: Player 2's store
+        //initialize the board with stones in each pit
+        //player 1's pits: 0-5, player 2's pits: 7-12
+        pits = new Pit[14];
+        //player 1's store: 6, player 2's store: 13
+        stores = new Store[]{new Store(player1), new Store(player2)};
 
         for (int i = 0; i < pits.length; i++) {
             if (i != 6 && i!= 13) {
@@ -35,16 +37,17 @@ public class KalahBoard {
     }
 
     public void makeMove(KalahMove move) throws IllegalAccessException {
-        //Player currentPlayer = move.getPlayer();
         int pitIndex = move.getPitIndex();
         if(!validMove(move)) {
             throw new IllegalAccessException("Move not valid for your turn");
         }
         Pit selected = pits[pitIndex];
         int numberMoves = selected.getSeeds();
+        
         //clear selected pit
         selected.clear();
 
+        //sow seeds in the selected pit
         int curr = pitIndex + 1;
         while (numberMoves > 0) {
             if(curr != 6 && curr != 13) {
@@ -58,6 +61,7 @@ public class KalahBoard {
             captureStones(lastStoneIndex);
         }
 
+        //update current player after turn
         currentPlayer = (currentPlayer == player1) ? player2 : player1;
     }
     private boolean isLastStone(int pitIndex) {
@@ -68,10 +72,10 @@ public class KalahBoard {
         int oppositePitIndex = pits.length - 2 - lastStoneIndex;
         int capturedStones = pits[lastStoneIndex].getSeeds() + pits[oppositePitIndex].getSeeds();
 
-        // Capture the stones by adding them to the current player's store
+        //capture the seeds by adding them to the current player's store
         stores[currentPlayer.getPlayerNumber() - 1].sow(capturedStones);
 
-        // Clear the stones from the captured pits
+        //clear the seeds from the captured pits
         pits[lastStoneIndex].clear();
         pits[oppositePitIndex].clear();
     }
