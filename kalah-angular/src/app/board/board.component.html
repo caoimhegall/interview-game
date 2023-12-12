@@ -1,0 +1,13 @@
+<div class="board">
+  <div class="store">{{ gameData?.player1Store }}</div>
+  <div *ngFor="let pit of gameData?.player1Pits; let i = index" class="pit" (click)="makeMove(i)">
+      {{ pit }}
+  </div>
+  <div></div>
+</div>
+<div class="board">
+  <div *ngFor="let pit of gameData?.player2Pits; let i = index" class="pit" (click)="makeMove(i + 7)">
+    {{ pit }}
+  </div>
+  <div class="store">{{ gameData?.player1Store }}</div>
+</div>
