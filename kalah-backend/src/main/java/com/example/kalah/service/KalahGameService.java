@@ -12,19 +12,19 @@ public class KalahGameService {
         kalahBoard = new KalahBoard(4, "Player1", "Player2");
     }
 
-    // Not used in my game yet but starts the game
+    //not used in my game yet but starts the game
     public void startGame() {
         kalahBoard = new KalahBoard(4, "Player1", "Player2");
     }
 
-    // Make move
+    //make move, returns KalahBoardResponse object to update frontend
     public KalahBoardResponse makeMove(KalahMove move) throws IllegalAccessException {
         kalahBoard.makeMove(move);
 
         if (isGameOver()) {
             System.out.println("Game over!");
         }
-        return new KalahBoardResponse();
+        return new KalahBoardResponse(kalahBoard);
     }
 
     public boolean isGameOver() {
